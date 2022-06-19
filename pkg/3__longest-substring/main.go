@@ -7,15 +7,11 @@ func LengthOfLongestSubstring(s string) int {
 	longest := 0
 
 	for idx, char := range s {
-		if runeIdx, ok := runeMap[char]; ok {
-			if runeIdx > left-1 {
-				left = runeIdx + 1
-			}
+		if runeIdx, ok := runeMap[char]; ok && runeIdx > left-1 {
+			left = runeIdx + 1
 		}
 
-		currentLength := idx - left + 1
-
-		if currentLength > longest {
+		if currentLength := idx - left + 1; currentLength > longest {
 			longest = currentLength
 		}
 
