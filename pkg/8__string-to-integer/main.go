@@ -47,3 +47,54 @@ func MyAtoi(s string) int {
 
 	return int(finalVal)
 }
+
+func MyAtoiImproved(s string) int {
+	inputLength := len(s)
+	maxVal := math.Pow(2, 31) - 1
+	minVal := math.Pow(-2, 31)
+	sign := 1
+	result := 0
+	index := 0
+
+	// Shed opening whitespace
+	for index < inputLength {
+		if s[index] == ' ' {
+			index += 1
+		} else {
+			break
+		}
+	}
+
+	// Check if a sign is present
+	if index < inputLength {
+		if s[index] == '-' {
+			sign = -1
+			index += 1
+		} else if s[index] == '+' {
+			index += 1
+		}
+	}
+
+	trimmedStr := s[index:]
+
+	for _, val := range trimmedStr {
+		ascii := int(val) - 48
+
+		if ascii < 0 || ascii > 9 {
+			break
+		}
+
+		// The overflow check
+		if result > int(math.Floor(maxVal/10)) || (result == int(math.Floor(maxVal/10)) && ascii > int(maxVal)%10) {
+			if sign == 1 {
+				return int(maxVal)
+			} else {
+				return int(minVal)
+			}
+		}
+
+		result = result*10 + ascii
+	}
+
+	return sign * result
+}
