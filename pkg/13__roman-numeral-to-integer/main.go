@@ -1,7 +1,5 @@
 package romannumeraltointeger
 
-import "strings"
-
 func RomanToInt(s string) int {
 	numeral := map[string]int{
 		"I": 1,
@@ -13,27 +11,22 @@ func RomanToInt(s string) int {
 		"M": 1000,
 	}
 
-	splitString := strings.Split(s, "")
-
-	pointer := 0
 	total := 0
 
-	for pointer < len(splitString) {
-		currentVal := numeral[splitString[pointer]]
+	for i := 0; i < len(s); i++ {
+		currentVal := numeral[string(s[i])]
 		nextVal := 0
 
-		if pointer+1 < len(splitString) {
-			nextVal = numeral[splitString[pointer+1]]
+		if i+1 < len(s) {
+			nextVal = numeral[string(s[i+1])]
 		}
 
 		if currentVal < nextVal {
 			total += nextVal - currentVal
 
-			pointer += 2
+			i++
 		} else {
 			total += currentVal
-
-			pointer += 1
 		}
 	}
 
