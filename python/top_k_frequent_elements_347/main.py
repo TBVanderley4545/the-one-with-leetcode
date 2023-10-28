@@ -25,4 +25,4 @@ class Solution:
         for val in nums:
             occurenceMap[val] = occurenceMap.get(val, 0) + 1
 
-        return sorted(occurenceMap, key=occurenceMap.get, reverse=True)[:k]
+        return sorted(occurenceMap, key=occurenceMap.get)[-k:]
