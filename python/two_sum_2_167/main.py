@@ -11,3 +11,5 @@ class Solution:
                 p2 -= 1
             else:
                 return [p1 + 1, p2 + 1]
+
+        return []
